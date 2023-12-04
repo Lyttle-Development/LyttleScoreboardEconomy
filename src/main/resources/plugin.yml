@@ -1,0 +1,13 @@
+name: MapleEconomy
+version: '${project.version}'
+main: com.lyttldev.mapleeconomy.MapleEconomy
+api-version: '1.20'
+author: LyttlDev
+depend: [Vault]
+commands:
+  tokens:
+    usage: /tokens
+    description: A command
+  baltop:
+    usage: /baltop
+    description: A command
