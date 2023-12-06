@@ -8,6 +8,7 @@ import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.*;
 
 import java.util.List;
+import java.util.Objects;
 
 public class VaultEconomy implements Economy {
 
@@ -42,7 +43,10 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public EconomyResponse depositPlayer(String playerName, String worldName, double amount) {
-        return null;
+        int currentBalance = (int) getBalance(playerName);
+        int newBalance = currentBalance + (int) amount;
+        scoreboard.getObjective(objectiveName).getScore(playerName).setScore(newBalance);
+        return new EconomyResponse(amount, newBalance, EconomyResponse.ResponseType.SUCCESS, null);
     }
 
     /**
@@ -56,7 +60,10 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public EconomyResponse depositPlayer(OfflinePlayer player, String worldName, double amount) {
-        return null;
+        int currentBalance = (int) getBalance(player);
+        int newBalance = currentBalance + (int) amount;
+        scoreboard.getObjective(objectiveName).getScore(player.getName()).setScore(newBalance);
+        return new EconomyResponse(amount, newBalance, EconomyResponse.ResponseType.SUCCESS, null);
     }
 
     /**
@@ -66,7 +73,8 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public EconomyResponse createBank(String name, String player) {
-        return null;
+        int balance = (int) getBalance(player);
+        return new EconomyResponse(0, balance, EconomyResponse.ResponseType.SUCCESS, null);
     }
 
     /**
@@ -78,7 +86,8 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public EconomyResponse createBank(String name, OfflinePlayer player) {
-        return null;
+        int balance = (int) getBalance(player);
+        return new EconomyResponse(0, balance, EconomyResponse.ResponseType.SUCCESS, null);
     }
 
     /**
@@ -89,7 +98,9 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public EconomyResponse deleteBank(String name) {
-        return null;
+        int balance = (int) getBalance(name);
+        scoreboard.getObjective(objectiveName).getScore(name).setScore(0);
+        return new EconomyResponse(balance * -1, 0, EconomyResponse.ResponseType.SUCCESS, null);
     }
 
     /**
@@ -100,7 +111,8 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public EconomyResponse bankBalance(String name) {
-        return null;
+        int balance = (int) getBalance(name);
+        return new EconomyResponse(0, balance, EconomyResponse.ResponseType.SUCCESS, null);
     }
 
     /**
@@ -112,7 +124,12 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public EconomyResponse bankHas(String name, double amount) {
-        return null;
+        int balance = (int) getBalance(name);
+        if (balance >= amount) {
+            return new EconomyResponse(0, balance, EconomyResponse.ResponseType.SUCCESS, null);
+        } else {
+            return new EconomyResponse(0, balance, EconomyResponse.ResponseType.FAILURE, null);
+        }
     }
 
     /**
@@ -124,7 +141,14 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public EconomyResponse bankWithdraw(String name, double amount) {
-        return null;
+        int currentBalance = (int) getBalance(name);
+        if (currentBalance >= amount) {
+            int newBalance = currentBalance - (int) amount;
+            scoreboard.getObjective(objectiveName).getScore(name).setScore(newBalance);
+            return new EconomyResponse(amount, newBalance, EconomyResponse.ResponseType.SUCCESS, null);
+        } else {
+            return new EconomyResponse(0, currentBalance, EconomyResponse.ResponseType.FAILURE, "Insufficient funds");
+        }
     }
 
     /**
@@ -136,7 +160,10 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public EconomyResponse bankDeposit(String name, double amount) {
-        return null;
+        int currentBalance = (int) getBalance(name);
+        int newBalance = currentBalance + (int) amount;
+        scoreboard.getObjective(objectiveName).getScore(name).setScore(newBalance);
+        return new EconomyResponse(amount, newBalance, EconomyResponse.ResponseType.SUCCESS, null);
     }
 
     /**
@@ -146,7 +173,11 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public EconomyResponse isBankOwner(String name, String playerName) {
-        return null;
+        if (Objects.equals(name, playerName)) {
+            return new EconomyResponse(0, 0, EconomyResponse.ResponseType.SUCCESS, null);
+        } else {
+            return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, null);
+        }
     }
 
     /**
@@ -158,7 +189,11 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public EconomyResponse isBankOwner(String name, OfflinePlayer player) {
-        return null;
+        if (Objects.equals(name, player.getName())) {
+            return new EconomyResponse(0, 0, EconomyResponse.ResponseType.SUCCESS, null);
+        } else {
+            return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, null);
+        }
     }
 
     /**
@@ -168,7 +203,11 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public EconomyResponse isBankMember(String name, String playerName) {
-        return null;
+        if (Objects.equals(name, playerName)) {
+            return new EconomyResponse(0, 0, EconomyResponse.ResponseType.SUCCESS, null);
+        } else {
+            return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, null);
+        }
     }
 
     /**
@@ -180,7 +219,11 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public EconomyResponse isBankMember(String name, OfflinePlayer player) {
-        return null;
+        if (Objects.equals(name, player.getName())) {
+            return new EconomyResponse(0, 0, EconomyResponse.ResponseType.SUCCESS, null);
+        } else {
+            return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, null);
+        }
     }
 
     /**
@@ -199,7 +242,7 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public boolean createPlayerAccount(String playerName) {
-        return false;
+        return true;
     }
 
     /**
@@ -210,7 +253,7 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public boolean createPlayerAccount(OfflinePlayer player) {
-        return false;
+        return true;
     }
 
     /**
@@ -220,7 +263,7 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public boolean createPlayerAccount(String playerName, String worldName) {
-        return false;
+        return true;
     }
 
     /**
@@ -233,7 +276,7 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public boolean createPlayerAccount(OfflinePlayer player, String worldName) {
-        return false;
+        return true;
     }
 
     @Override
@@ -256,7 +299,14 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public EconomyResponse withdrawPlayer(String playerName, String worldName, double amount) {
-        return null;
+        int currentBalance = (int) getBalance(playerName);
+        if (currentBalance >= amount) {
+            int newBalance = currentBalance - (int) amount;
+            scoreboard.getObjective(objectiveName).getScore(playerName).setScore(newBalance);
+            return new EconomyResponse(amount, newBalance, EconomyResponse.ResponseType.SUCCESS, null);
+        } else {
+            return new EconomyResponse(0, currentBalance, EconomyResponse.ResponseType.FAILURE, "Insufficient funds");
+        }
     }
 
     /**
@@ -270,7 +320,14 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public EconomyResponse withdrawPlayer(OfflinePlayer player, String worldName, double amount) {
-        return null;
+        int currentBalance = (int) getBalance(player);
+        if (currentBalance >= amount) {
+            int newBalance = currentBalance - (int) amount;
+            scoreboard.getObjective(objectiveName).getScore(player).setScore(newBalance);
+            return new EconomyResponse(amount, newBalance, EconomyResponse.ResponseType.SUCCESS, null);
+        } else {
+            return new EconomyResponse(0, currentBalance, EconomyResponse.ResponseType.FAILURE, "Insufficient funds");
+        }
     }
 
     /**
@@ -280,7 +337,10 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public EconomyResponse depositPlayer(String playerName, double amount) {
-        return null;
+        int currentBalance = (int) getBalance(playerName);
+        int newBalance = currentBalance + (int) amount;
+        scoreboard.getObjective(objectiveName).getScore(playerName).setScore(newBalance);
+        return new EconomyResponse(amount, newBalance, EconomyResponse.ResponseType.SUCCESS, null);
     }
 
     /**
@@ -290,7 +350,7 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     /**
@@ -300,7 +360,7 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public String getName() {
-        return null;
+        return "MapleEconomy";
     }
 
     /**
@@ -310,7 +370,7 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public boolean hasBankSupport() {
-        return false;
+        return true;
     }
 
     /**
@@ -334,7 +394,7 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public String format(double amount) {
-        return null;
+        return String.valueOf((int) amount);
     }
 
     /**
@@ -345,7 +405,7 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public String currencyNamePlural() {
-        return null;
+        return "Tokens";
     }
 
     /**
@@ -356,7 +416,7 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public String currencyNameSingular() {
-        return null;
+        return "Token";
     }
 
     /**
@@ -365,7 +425,7 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public boolean hasAccount(String playerName) {
-        return false;
+        return true;
     }
 
     /**
@@ -378,7 +438,7 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public boolean hasAccount(OfflinePlayer player) {
-        return false;
+        return true;
     }
 
     /**
@@ -388,7 +448,7 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public boolean hasAccount(String playerName, String worldName) {
-        return false;
+        return true;
     }
 
     /**
@@ -402,7 +462,7 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public boolean hasAccount(OfflinePlayer player, String worldName) {
-        return false;
+        return true;
     }
 
     /**
@@ -411,7 +471,8 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public double getBalance(String playerName) {
-        return 0;
+        int balance = (int) getBalance(playerName);
+        return balance;
     }
 
     @Override
@@ -427,7 +488,8 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public double getBalance(String playerName, String world) {
-        return 0;
+        int balance = (int) getBalance(playerName);
+        return balance;
     }
 
     /**
@@ -440,7 +502,8 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public double getBalance(OfflinePlayer player, String world) {
-        return 0;
+        int balance = (int) getBalance(player.getName());
+        return balance;
     }
 
     /**
@@ -450,7 +513,8 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public boolean has(String playerName, double amount) {
-        return false;
+        int balance = (int) getBalance(playerName);
+        return balance >= amount;
     }
 
     /**
@@ -462,7 +526,8 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public boolean has(OfflinePlayer player, double amount) {
-        return false;
+        int balance = (int) getBalance(player);
+        return balance >= amount;
     }
 
     /**
@@ -473,7 +538,8 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public boolean has(String playerName, String worldName, double amount) {
-        return false;
+        int balance = (int) getBalance(playerName);
+        return balance >= amount;
     }
 
     /**
@@ -487,7 +553,8 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public boolean has(OfflinePlayer player, String worldName, double amount) {
-        return false;
+        int balance = (int) getBalance(player);
+        return balance >= amount;
     }
 
     /**
@@ -497,6 +564,13 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public EconomyResponse withdrawPlayer(String playerName, double amount) {
-        return null;
+        int currentBalance = (int) getBalance(playerName);
+        if (currentBalance >= amount) {
+            int newBalance = currentBalance - (int) amount;
+            scoreboard.getObjective(objectiveName).getScore(playerName).setScore(newBalance);
+            return new EconomyResponse(amount, newBalance, EconomyResponse.ResponseType.SUCCESS, null);
+        } else {
+            return new EconomyResponse(0, currentBalance, EconomyResponse.ResponseType.FAILURE, "Insufficient funds");
+        }
     }
 }
