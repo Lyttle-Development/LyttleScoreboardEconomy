@@ -1,4 +1,4 @@
-package com.lyttldev.mapleeconomy.utils;
+package com.lyttldev.lyttlescoreboardeconomy.utils;
 
 import org.bukkit.Bukkit;
 

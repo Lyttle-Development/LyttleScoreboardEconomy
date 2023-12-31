@@ -1,4 +1,4 @@
-package com.lyttldev.mapleeconomy.modules;
+package com.lyttldev.lyttlescoreboardeconomy.modules;
 
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
@@ -360,7 +360,7 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public String getName() {
-        return "MapleEconomy";
+        return "LyttleScoreboardEconomy";
     }
 
     /**

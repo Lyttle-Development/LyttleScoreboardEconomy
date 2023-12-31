@@ -1,7 +1,7 @@
-package com.lyttldev.mapleeconomy.commands;
+package com.lyttldev.lyttlescoreboardeconomy.commands;
 
-import com.lyttldev.mapleeconomy.MapleEconomy;
-import com.lyttldev.mapleeconomy.utils.Message;
+import com.lyttldev.lyttlescoreboardeconomy.LyttleScoreboardEconomy;
+import com.lyttldev.lyttlescoreboardeconomy.utils.Message;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -14,9 +14,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TokensCommand implements CommandExecutor, TabExecutor {
-    private final MapleEconomy plugin;
+    private final LyttleScoreboardEconomy plugin;
 
-    public TokensCommand(MapleEconomy plugin) {
+    public TokensCommand(LyttleScoreboardEconomy plugin) {
         plugin.getCommand("tokens").setExecutor(this);
         this.plugin = plugin;
     }

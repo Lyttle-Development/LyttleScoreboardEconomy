@@ -1,8 +1,8 @@
-package com.lyttldev.mapleeconomy;
+package com.lyttldev.lyttlescoreboardeconomy;
 
-import com.lyttldev.mapleeconomy.commands.*;
-import com.lyttldev.mapleeconomy.modules.*;
-import com.lyttldev.mapleeconomy.utils.*;
+import com.lyttldev.lyttlescoreboardeconomy.commands.*;
+import com.lyttldev.lyttlescoreboardeconomy.modules.*;
+import com.lyttldev.lyttlescoreboardeconomy.utils.*;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -10,9 +10,8 @@ import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.plugin.ServicesManager;
-import org.bukkit.scoreboard.Scoreboard;
 
-public class MapleEconomy extends JavaPlugin {
+public class LyttleScoreboardEconomy extends JavaPlugin {
     public VaultEconomy economyImplementer;
 
     @Override

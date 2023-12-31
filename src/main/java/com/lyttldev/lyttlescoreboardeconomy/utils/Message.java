@@ -1,6 +1,6 @@
-package com.lyttldev.mapleeconomy.utils;
+package com.lyttldev.lyttlescoreboardeconomy.utils;
 
-import com.lyttldev.mapleeconomy.MapleEconomy;
+import com.lyttldev.lyttlescoreboardeconomy.LyttleScoreboardEconomy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -8,9 +8,9 @@ import org.bukkit.entity.Player;
 import javax.annotation.Nullable;
 
 public class Message {
-    public static MapleEconomy plugin;
+    public static LyttleScoreboardEconomy plugin;
 
-    public static void init(MapleEconomy plugin) {
+    public static void init(LyttleScoreboardEconomy plugin) {
         Message.plugin = plugin;
     }
 

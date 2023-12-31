@@ -1,13 +1,13 @@
-package com.lyttldev.mapleeconomy.utils;
+package com.lyttldev.lyttlescoreboardeconomy.utils;
 
-import com.lyttldev.mapleeconomy.MapleEconomy;
+import com.lyttldev.lyttlescoreboardeconomy.LyttleScoreboardEconomy;
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 
 public class Console {
-    public static MapleEconomy plugin;
+    public static LyttleScoreboardEconomy plugin;
 
-    public static void init(MapleEconomy plugin) {
+    public static void init(LyttleScoreboardEconomy plugin) {
         Console.plugin = plugin;
     }
 

@@ -1,7 +1,7 @@
-package com.lyttldev.mapleeconomy.commands;
+package com.lyttldev.lyttlescoreboardeconomy.commands;
 
-import com.lyttldev.mapleeconomy.MapleEconomy;
-import com.lyttldev.mapleeconomy.utils.Message;
+import com.lyttldev.lyttlescoreboardeconomy.LyttleScoreboardEconomy;
+import com.lyttldev.lyttlescoreboardeconomy.utils.Message;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.command.Command;
@@ -18,9 +18,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class BaltopCommand implements CommandExecutor, TabExecutor {
-    private final MapleEconomy plugin;
+    private final LyttleScoreboardEconomy plugin;
 
-    public BaltopCommand(MapleEconomy plugin) {
+    public BaltopCommand(LyttleScoreboardEconomy plugin) {
         plugin.getCommand("baltop").setExecutor(this);
         this.plugin = plugin;
     }

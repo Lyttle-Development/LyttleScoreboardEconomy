@@ -1,6 +1,6 @@
-name: MapleEconomy
+name: LyttleScoreboardEconomy
 version: '${project.version}'
-main: com.lyttldev.mapleeconomy.MapleEconomy
+main: com.lyttldev.lyttlescoreboardeconomy.LyttleScoreboardEconomy
 api-version: '1.20'
 author: LyttlDev
 depend: [Vault]
