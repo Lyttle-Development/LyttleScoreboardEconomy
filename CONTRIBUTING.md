@@ -4,7 +4,7 @@ First off, thank you for considering contributing to LyttleScoreboardEconomy. It
 
 ## Where do I go from here?
 
-If you've noticed a bug or have a feature request, make sure to check our [issues](https://github.com/Lyttle-Development/LyttleScoreboardEconomy/issues) if someone else in the community has already made a ticket. If not, go ahead and [make one](https://github.com/Stualyttle/LyttleScoreboardEconomy/issues/new)!
+If you've noticed a bug or have a feature request, make sure to check our [issues](https://github.com/Lyttle-Development/LyttleScoreboardEconomy/issues) if someone else in the community has already made a ticket. If not, go ahead and [make one](https://github.com/Lyttle-Development/LyttleScoreboardEconomy/issues/new)!
 
 ## Fork & create a branch
 

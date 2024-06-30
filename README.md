@@ -39,6 +39,10 @@ LyttleScoreboardEconomy provides the following methods for interacting with a pl
 - `has(OfflinePlayer player, double amount)`: Checks if the player has at least the specified amount.
 - `withdrawPlayer(OfflinePlayer player, double amount)`: Withdraws the specified amount from the player's balance.
 
+## Support
+
+If you encounter any issues or have any questions, please [open an issue](https://github.com/Lyttle-Development/LyttleScoreboardEconomy/issues) on GitHub.
+
 ## Contributing
 
 Contributions are welcome! Please read the [contributing guidelines](CONTRIBUTING.md) before getting started.
