@@ -13,9 +13,9 @@ LyttleScoreboardEconomy is a Minecraft plugin that provides an economy system ba
 
 ## Installation
 
-1. Download the latest release from the GitHub releases page.
-2. Place the downloaded `.jar` file into your server's `plugins` directory.
-3. Restart your server.
+1. Download the latest version of the plugin from the [releases page](https://github.com/Lyttle-Development/LyttleScoreboardEconomy/releases).
+2. Place the downloaded `.jar` file into your server's `plugins` folder.
+3. Restart your server or use a plugin manager to load the plugin.
 
 ## Usage
 
