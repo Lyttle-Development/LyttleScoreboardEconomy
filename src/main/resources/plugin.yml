@@ -1,5 +1,5 @@
 name: LyttleScoreboardEconomy
-version: '${project.version}'
+version: '${projectVersion}'
 main: com.lyttldev.lyttlescoreboardeconomy.LyttleScoreboardEconomy
 api-version: '1.20'
 author: LyttlDev
