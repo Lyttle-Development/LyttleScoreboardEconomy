@@ -24,6 +24,11 @@ public class BaltopCommand implements CommandExecutor, TabExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+
+        if (!sender.hasPermission("lyttleeconomyscoreboard.baltop")) {
+            return true;
+        }
+
         if (sender instanceof Player) {
             int page = args.length > 0 ? Integer.parseInt(args[0]) : 1;
             int pageSize = 10;
