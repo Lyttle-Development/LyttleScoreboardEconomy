@@ -1,7 +1,7 @@
 name: LyttleScoreboardEconomy
 version: '${projectVersion}'
 main: com.lyttldev.lyttlescoreboardeconomy.LyttleScoreboardEconomy
-api-version: '1.20'
+api-version: '1.21'
 author: LyttlDev
 depend:
   - Vault
@@ -12,7 +12,13 @@ commands:
   tokens:
     usage: /tokens
     description: A command
+
   baltop:
     usage: /baltop
     description: A command
+    permission: lyttleeconomyscoreboard.baltop
 
+  lyttlescoreboardeconomy:
+    usage: /lyttlescoreboardeconomy [reload]
+    description: Admin command, mainly reload the config without the rest of the server
+    permission: lyttlescoreboardeconomy.lyttlescoreboardeconomy

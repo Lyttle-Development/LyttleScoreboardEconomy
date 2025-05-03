@@ -2,15 +2,16 @@ package com.lyttldev.lyttlescoreboardeconomy.commands;
 
 import com.lyttldev.lyttlescoreboardeconomy.LyttleScoreboardEconomy;
 import com.lyttldev.lyttlescoreboardeconomy.utils.Message;
-import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class TokensCommand implements CommandExecutor, TabExecutor {
@@ -37,29 +38,29 @@ public class TokensCommand implements CommandExecutor, TabExecutor {
                     int depositAmount = Integer.parseInt(args[2]);
 
                     if (target == null) {
-                        Message.sendPlayer(player, "That player is not online.", true);
+                        Message.sendMessage(player, "That player is not online.");
                         return true;
                     }
 
                     if (target == player) {
-                        Message.sendPlayer(player, "You cannot send tokens to yourself.", true);
+                        Message.sendMessage(player, "You cannot send tokens to yourself.");
                         return true;
                     }
 
                     if (depositAmount < 0) {
-                        Message.sendPlayer(player, "You cannot send a negative amount of tokens.", true);
+                        Message.sendMessage(player, "You cannot send a negative amount of tokens.");
                         return true;
                     }
 
                     if (depositAmount > plugin.economyImplementer.getBalance(player)) {
-                        Message.sendPlayer(player, "You do not have enough tokens to send.", true);
+                        Message.sendMessage(player, "You do not have enough tokens to send.");
                         return true;
                     }
 
                     plugin.economyImplementer.depositPlayer(target, depositAmount);
                     plugin.economyImplementer.depositPlayer(player, depositAmount * -1);
-                    Message.sendPlayer(player, "You have deposited &a" + depositAmount + " tokens&7 into &e" + target.getName() + "'s&7 account", true);
-                    Message.sendPlayer(target, "&e" + player.getName() + "&7 has deposited &a" + depositAmount + " tokens&7 into your account", true);
+                    Message.sendMessage(player, "You have deposited &a" + depositAmount + " tokens&7 into &e" + target.getName() + "'s&7 account");
+                    Message.sendMessage(target, "&e" + player.getName() + "&7 has deposited &a" + depositAmount + " tokens&7 into your account");
                     return true;
                 } catch (Exception e) {
                     return false;
@@ -74,7 +75,7 @@ public class TokensCommand implements CommandExecutor, TabExecutor {
                 try {
                     Player target = Bukkit.getPlayer(args[1]);
                     int balance = (int)  plugin.economyImplementer.getBalance(target);
-                    Message.sendPlayer(player, "&8" + target.getName() + "&7 has &a" + balance + " tokens&7.", true);
+                    Message.sendMessage(player, "&8" + target.getName() + "&7 has &a" + balance + " tokens&7.");
                     return true;
                 } catch (Exception e) {
                     return false;
@@ -85,7 +86,7 @@ public class TokensCommand implements CommandExecutor, TabExecutor {
         // get own tokens
         try {
             int balance = (int)  plugin.economyImplementer.getBalance(player);
-            Message.sendPlayer(player, "You have &a" + balance + " tokens&7.", true);
+            Message.sendMessage(player, "You have &a" + balance + " tokens&7.");
             return true;
         } catch (Exception e) {
             return false;
@@ -95,13 +96,20 @@ public class TokensCommand implements CommandExecutor, TabExecutor {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] arguments) {
         if (arguments.length == 1) {
-            return Arrays.asList("send", "balance");
+            List<String> options = Arrays.asList("send", "balance");
+            List<String> result = new ArrayList<>(Collections.emptyList());
+            for (String option : options) {
+                if (option.toLowerCase().startsWith(arguments[0].toLowerCase())) {
+                    result.add(option);
+                }
+            }
+            return result;
         }
 
         if (arguments.length == 2) {
             return null;
         }
 
-        return Arrays.asList();
+        return List.of();
     }
 }

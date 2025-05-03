@@ -1,0 +1,13 @@
+############################################################
+#     Lyttle Scoreboard Economy - messages.yml             #
+############################################################
+# This file contains all in-game messages used by the
+# Lyttle Scoreboard Economy plugin.
+#
+# - Use MiniMessage formatting for styling.
+# - Do NOT remove message keys, or the plugin may fail.
+# - Customize text as needed to match your server theme.
+############################################################
+
+# Prefix used at the start of most plugin messages
+prefix: <dark_aqua><bold>Lyttle<aqua><bold>Economy<reset> <dark_gray>- <gray>
