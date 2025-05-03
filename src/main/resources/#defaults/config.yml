@@ -1,2 +1,13 @@
-# Do not change the config_version, it is used to update the configuration file.
+############################################################
+#     Lyttle Scoreboard Economy - config.yml               #
+############################################################
+# This configuration file is used by the Lyttle Scoreboard
+# Economy plugin. Do not remove or modify critical keys
+# unless you know what you're doing.
+#
+# - config_version is used internally for automatic updates.
+# - Future options may be added in updates.
+############################################################
+
+# ⚠️ Do not change this value manually!
 config_version: 0
