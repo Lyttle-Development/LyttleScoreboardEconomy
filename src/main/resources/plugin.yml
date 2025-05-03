@@ -1,7 +1,7 @@
 name: LyttleScoreboardEconomy
 version: '${projectVersion}'
 main: com.lyttldev.lyttlescoreboardeconomy.LyttleScoreboardEconomy
-api-version: '1.20'
+api-version: '1.21'
 author: LyttlDev
 depend:
   - Vault
