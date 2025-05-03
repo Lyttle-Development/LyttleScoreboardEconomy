@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -18,27 +17,30 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class BaltopCommand implements CommandExecutor, TabExecutor {
-    private final LyttleScoreboardEconomy plugin;
 
     public BaltopCommand(LyttleScoreboardEconomy plugin) {
         plugin.getCommand("baltop").setExecutor(this);
-        this.plugin = plugin;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+
+        if (!sender.hasPermission("lyttleeconomyscoreboard.baltop")) {
+            return true;
+        }
+
         if (sender instanceof Player) {
             int page = args.length > 0 ? Integer.parseInt(args[0]) : 1;
             int pageSize = 10;
             List<Map.Entry<String, Double>> topPlayers = getTopPlayers();
             int pages = topPlayers.size() >= pageSize ? (int) Math.ceil(topPlayers.size() / pageSize) : 1;
             if (page < 1) {
-                Message.sendPlayer((Player) sender, "Page must be greater than 0.", true);
+                Message.sendMessage(sender, "Page must be greater than 0.");
                 return true;
             }
 
             if (page > pages) {
-                Message.sendPlayer((Player) sender, "There are only " + pages + " pages of top players.", true);
+                Message.sendMessage(sender, "There are only " + pages + " pages of top players.");
                 return true;
             }
 
@@ -52,7 +54,7 @@ public class BaltopCommand implements CommandExecutor, TabExecutor {
                 message += "\n&7" + nr + ". &e" + player.getKey() + "&8: &a" + player.getValue() + " Tokens&7";
             }
             message += "\nPage " + page + "/" + pages;
-            Message.sendPlayer((Player) sender, message, true);
+            Message.sendMessage(sender, message);
         } else {
             sender.sendMessage("This command can only be run by a player.");
         }
@@ -78,6 +80,6 @@ public class BaltopCommand implements CommandExecutor, TabExecutor {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] arguments) {
-        return Arrays.asList();
+        return List.of();
     }
 }
