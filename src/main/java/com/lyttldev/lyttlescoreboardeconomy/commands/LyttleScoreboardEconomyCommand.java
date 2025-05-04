@@ -1,7 +1,7 @@
 package com.lyttldev.lyttlescoreboardeconomy.commands;
 
 import com.lyttldev.lyttlescoreboardeconomy.LyttleScoreboardEconomy;
-import com.lyttldev.lyttlescoreboardeconomy.utils.Message;
+import com.lyttledev.lyttleutils.utils.communication.Message;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

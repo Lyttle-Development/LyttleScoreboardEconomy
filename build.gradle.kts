@@ -9,30 +9,30 @@ plugins {
     `java-library`
     `maven-publish`
     id("io.papermc.hangar-publish-plugin") version "0.1.2"
+    id("co.uzzu.dotenv.gradle") version "4.0.0"
 }
 
 repositories {
     mavenLocal()
+    maven { url = uri("https://repo.papermc.io/repository/maven-public/") }
+    maven { url = uri("https://oss.sonatype.org/content/groups/public/") }
+    maven { url = uri("https://jitpack.io") }
+    maven { url = uri("https://repo.maven.apache.org/maven2/") }
     maven {
-        url = uri("https://repo.papermc.io/repository/maven-public/")
-    }
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/Lyttle-Development/LyttleUtils")
+        credentials {
+            username = project.findProperty("GPR_USER") as String? ?: System.getenv("GPR_USER") ?: env.GPR_USER.value
+            password = project.findProperty("GPR_API_KEY") as String? ?: System.getenv("GPR_API_KEY") ?: env.GPR_API_KEY.value
+        }
 
-    maven {
-        url = uri("https://oss.sonatype.org/content/groups/public/")
-    }
-
-    maven {
-        url = uri("https://jitpack.io")
-    }
-
-    maven {
-        url = uri("https://repo.maven.apache.org/maven2/")
     }
 }
 
 dependencies {
     compileOnly(libs.io.papermc.paper.paper.api)
     compileOnly(libs.com.github.milkbowl.vaultapi)
+    implementation("com.lyttledev:lyttleutils:0.0.1-ALPHA.11")
 }
 
 group = "com.lyttldev"

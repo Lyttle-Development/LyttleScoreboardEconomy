@@ -3,8 +3,9 @@ package com.lyttldev.lyttlescoreboardeconomy;
 import com.lyttldev.lyttlescoreboardeconomy.commands.*;
 import com.lyttldev.lyttlescoreboardeconomy.modules.*;
 import com.lyttldev.lyttlescoreboardeconomy.types.Configs;
-import com.lyttldev.lyttlescoreboardeconomy.utils.*;
 
+import com.lyttledev.lyttleutils.utils.communication.Console;
+import com.lyttledev.lyttleutils.utils.communication.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.ServicePriority;
@@ -26,7 +27,7 @@ public class LyttleScoreboardEconomy extends JavaPlugin {
 
         // Plugin startup logic
         Console.init(this);
-        Message.init(this);
+        Message.init(this, config.messages);
         saveDefaultConfig();
         setupVaultEconomy();
 
