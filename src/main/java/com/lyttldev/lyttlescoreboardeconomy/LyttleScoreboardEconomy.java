@@ -13,6 +13,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.plugin.ServicesManager;
 
+import java.io.File;
+
 public class LyttleScoreboardEconomy extends JavaPlugin {
     public VaultEconomy economyImplementer;
     public Configs config;
@@ -52,6 +54,25 @@ public class LyttleScoreboardEconomy extends JavaPlugin {
             getLogger().severe("Failed to set up CustomEconomy! Disabling plugin.");
             getServer().getPluginManager().disablePlugin(this);
         }
+    }
+
+    @Override
+    public void saveDefaultConfig() {
+        String configPath = "config.yml";
+        if (!new File(getDataFolder(), configPath).exists())
+            saveResource(configPath, false);
+
+        String messagesPath = "messages.yml";
+        if (!new File(getDataFolder(), messagesPath).exists())
+            saveResource(messagesPath, false);
+
+        // Defaults:
+        String defaultPath = "#defaults/";
+        String defaultGeneralPath =  defaultPath + configPath;
+        saveResource(defaultGeneralPath, true);
+
+        String defaultMessagesPath =  defaultPath + messagesPath;
+        saveResource(defaultMessagesPath, true);
     }
 
     private void migrateConfig() {
