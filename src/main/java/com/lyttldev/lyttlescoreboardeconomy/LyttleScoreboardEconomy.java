@@ -18,6 +18,8 @@ import java.io.File;
 public class LyttleScoreboardEconomy extends JavaPlugin {
     public VaultEconomy economyImplementer;
     public Configs config;
+    public Console console;
+    public Message message;
 
     @Override
     public void onEnable() {
@@ -28,8 +30,8 @@ public class LyttleScoreboardEconomy extends JavaPlugin {
         migrateConfig();
 
         // Plugin startup logic
-        Console.init(this);
-        Message.init(this, config.messages);
+        this.console = new Console(this);
+        this.message = new Message(this, config.messages);
         saveDefaultConfig();
         setupVaultEconomy();
 
