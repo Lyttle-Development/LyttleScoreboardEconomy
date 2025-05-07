@@ -1,7 +1,6 @@
 package com.lyttldev.lyttlescoreboardeconomy.commands;
 
 import com.lyttldev.lyttlescoreboardeconomy.LyttleScoreboardEconomy;
-import com.lyttldev.lyttlescoreboardeconomy.utils.Message;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.command.Command;
@@ -17,8 +16,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class BaltopCommand implements CommandExecutor, TabExecutor {
+    private final LyttleScoreboardEconomy plugin;
 
     public BaltopCommand(LyttleScoreboardEconomy plugin) {
+        this.plugin = plugin;
         plugin.getCommand("baltop").setExecutor(this);
     }
 
@@ -35,12 +36,12 @@ public class BaltopCommand implements CommandExecutor, TabExecutor {
             List<Map.Entry<String, Double>> topPlayers = getTopPlayers();
             int pages = topPlayers.size() >= pageSize ? (int) Math.ceil(topPlayers.size() / pageSize) : 1;
             if (page < 1) {
-                Message.sendMessage(sender, "Page must be greater than 0.");
+                plugin.message.sendMessage(sender, "Page must be greater than 0.");
                 return true;
             }
 
             if (page > pages) {
-                Message.sendMessage(sender, "There are only " + pages + " pages of top players.");
+                plugin.message.sendMessage(sender, "There are only " + pages + " pages of top players.");
                 return true;
             }
 
@@ -54,7 +55,7 @@ public class BaltopCommand implements CommandExecutor, TabExecutor {
                 message += "\n&7" + nr + ". &e" + player.getKey() + "&8: &a" + player.getValue() + " Tokens&7";
             }
             message += "\nPage " + page + "/" + pages;
-            Message.sendMessage(sender, message);
+            plugin.message.sendMessage(sender, message);
         } else {
             sender.sendMessage("This command can only be run by a player.");
         }
