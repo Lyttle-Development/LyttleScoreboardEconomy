@@ -52,7 +52,7 @@ public class BaltopCommand implements CommandExecutor, TabExecutor {
                 }
                 Map.Entry<String, Double> player = topPlayers.get(i + (page - 1) * pageSize);
                 int nr = i + 1 + (page - 1) * pageSize;
-                message += "\n&7" + nr + ". &e" + player.getKey() + "&8: &a" + player.getValue() + " Tokens&7";
+                message += "\n<gray>" + nr + ". <yellow>" + player.getKey() + "<dark_gray>: <green>" + player.getValue() + " Tokens<gray>";
             }
             message += "\nPage " + page + "/" + pages;
             plugin.message.sendMessageRaw(sender, message);

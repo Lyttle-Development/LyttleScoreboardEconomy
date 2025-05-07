@@ -47,7 +47,7 @@ public class LyttleScoreboardEconomy extends JavaPlugin {
             RegisteredServiceProvider<VaultEconomy> rsp = servicesManager.getRegistration(VaultEconomy.class);
 
             if (rsp == null) {
-                economyImplementer = new VaultEconomy();
+                economyImplementer = new VaultEconomy(this);
                 servicesManager.register(Economy.class, economyImplementer, this, ServicePriority.Normal);
                 return;
             }
@@ -90,6 +90,17 @@ public class LyttleScoreboardEconomy extends JavaPlugin {
 
                 // Update config version.
                 config.general.set("config_version", 1);
+
+                // Recheck if the config is fully migrated.
+                migrateConfig();
+                break;
+            case "1":
+                // Migrate config entries.
+                config.general.set("scoreboard_objective", config.defaultGeneral.get("scoreboard_objective"));
+                config.general.set("scoreboard_objective_name", config.defaultGeneral.get("scoreboard_objective_name"));
+
+                // Update config version.
+                config.general.set("config_version", 2);
 
                 // Recheck if the config is fully migrated.
                 migrateConfig();

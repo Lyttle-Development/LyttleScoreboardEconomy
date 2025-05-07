@@ -58,8 +58,8 @@ public class TokensCommand implements CommandExecutor, TabExecutor {
 
                     plugin.economyImplementer.depositPlayer(target, depositAmount);
                     plugin.economyImplementer.depositPlayer(player, depositAmount * -1);
-                    plugin.message.sendMessageRaw(player, "You have deposited &a" + depositAmount + " tokens&7 into &e" + target.getName() + "'s&7 account");
-                    plugin.message.sendMessageRaw(target, "&e" + player.getName() + "&7 has deposited &a" + depositAmount + " tokens&7 into your account");
+                    plugin.message.sendMessageRaw(player, "<gray>You have deposited <green>" + depositAmount + " tokens <gray>into <yellow>" + target.getName() + "'s <gray>account</gray>");
+                    plugin.message.sendMessageRaw(target, "<yellow>" + player.getName() + " <gray>has deposited <green>" + depositAmount + " tokens <gray>into your account</gray>");
                     return true;
                 } catch (Exception e) {
                     return false;
@@ -74,7 +74,7 @@ public class TokensCommand implements CommandExecutor, TabExecutor {
                 try {
                     Player target = Bukkit.getPlayer(args[1]);
                     int balance = (int)  plugin.economyImplementer.getBalance(target);
-                    plugin.message.sendMessageRaw(player, "&8" + target.getName() + "&7 has &a" + balance + " tokens&7.");
+                    plugin.message.sendMessageRaw(player, "<dark_gray>" + target.getName() + "<gray> has <green>" + balance + " tokens</gray>");
                     return true;
                 } catch (Exception e) {
                     return false;
@@ -85,7 +85,7 @@ public class TokensCommand implements CommandExecutor, TabExecutor {
         // get own tokens
         try {
             int balance = (int)  plugin.economyImplementer.getBalance(player);
-            plugin.message.sendMessageRaw(player, "You have &a" + balance + " tokens&7.");
+            plugin.message.sendMessageRaw(player, "<gray>You have <green>" + balance + " tokens</gray>");
             return true;
         } catch (Exception e) {
             return false;
