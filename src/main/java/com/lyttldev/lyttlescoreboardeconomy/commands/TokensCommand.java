@@ -37,29 +37,29 @@ public class TokensCommand implements CommandExecutor, TabExecutor {
                     int depositAmount = Integer.parseInt(args[2]);
 
                     if (target == null) {
-                        plugin.message.sendMessage(player, "That player is not online.");
+                        plugin.message.sendMessageRaw(player, "That player is not online.");
                         return true;
                     }
 
                     if (target == player) {
-                        plugin.message.sendMessage(player, "You cannot send tokens to yourself.");
+                        plugin.message.sendMessageRaw(player, "You cannot send tokens to yourself.");
                         return true;
                     }
 
                     if (depositAmount < 0) {
-                        plugin.message.sendMessage(player, "You cannot send a negative amount of tokens.");
+                        plugin.message.sendMessageRaw(player, "You cannot send a negative amount of tokens.");
                         return true;
                     }
 
                     if (depositAmount > plugin.economyImplementer.getBalance(player)) {
-                        plugin.message.sendMessage(player, "You do not have enough tokens to send.");
+                        plugin.message.sendMessageRaw(player, "You do not have enough tokens to send.");
                         return true;
                     }
 
                     plugin.economyImplementer.depositPlayer(target, depositAmount);
                     plugin.economyImplementer.depositPlayer(player, depositAmount * -1);
-                    plugin.message.sendMessage(player, "You have deposited &a" + depositAmount + " tokens&7 into &e" + target.getName() + "'s&7 account");
-                    plugin.message.sendMessage(target, "&e" + player.getName() + "&7 has deposited &a" + depositAmount + " tokens&7 into your account");
+                    plugin.message.sendMessageRaw(player, "You have deposited &a" + depositAmount + " tokens&7 into &e" + target.getName() + "'s&7 account");
+                    plugin.message.sendMessageRaw(target, "&e" + player.getName() + "&7 has deposited &a" + depositAmount + " tokens&7 into your account");
                     return true;
                 } catch (Exception e) {
                     return false;
@@ -74,7 +74,7 @@ public class TokensCommand implements CommandExecutor, TabExecutor {
                 try {
                     Player target = Bukkit.getPlayer(args[1]);
                     int balance = (int)  plugin.economyImplementer.getBalance(target);
-                    plugin.message.sendMessage(player, "&8" + target.getName() + "&7 has &a" + balance + " tokens&7.");
+                    plugin.message.sendMessageRaw(player, "&8" + target.getName() + "&7 has &a" + balance + " tokens&7.");
                     return true;
                 } catch (Exception e) {
                     return false;
@@ -85,7 +85,7 @@ public class TokensCommand implements CommandExecutor, TabExecutor {
         // get own tokens
         try {
             int balance = (int)  plugin.economyImplementer.getBalance(player);
-            plugin.message.sendMessage(player, "You have &a" + balance + " tokens&7.");
+            plugin.message.sendMessageRaw(player, "You have &a" + balance + " tokens&7.");
             return true;
         } catch (Exception e) {
             return false;

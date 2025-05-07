@@ -36,12 +36,12 @@ public class BaltopCommand implements CommandExecutor, TabExecutor {
             List<Map.Entry<String, Double>> topPlayers = getTopPlayers();
             int pages = topPlayers.size() >= pageSize ? (int) Math.ceil(topPlayers.size() / pageSize) : 1;
             if (page < 1) {
-                plugin.message.sendMessage(sender, "Page must be greater than 0.");
+                plugin.message.sendMessageRaw(sender, "Page must be greater than 0.");
                 return true;
             }
 
             if (page > pages) {
-                plugin.message.sendMessage(sender, "There are only " + pages + " pages of top players.");
+                plugin.message.sendMessageRaw(sender, "There are only " + pages + " pages of top players.");
                 return true;
             }
 
@@ -55,7 +55,7 @@ public class BaltopCommand implements CommandExecutor, TabExecutor {
                 message += "\n&7" + nr + ". &e" + player.getKey() + "&8: &a" + player.getValue() + " Tokens&7";
             }
             message += "\nPage " + page + "/" + pages;
-            plugin.message.sendMessage(sender, message);
+            plugin.message.sendMessageRaw(sender, message);
         } else {
             sender.sendMessage("This command can only be run by a player.");
         }

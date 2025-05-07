@@ -21,7 +21,7 @@ public class LyttleScoreboardEconomyCommand implements CommandExecutor, TabCompl
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         // Check for permission
         if (!(sender.hasPermission("lyttlescoreboardeconomy.lyttlescoreboardeconomy"))) {
-            plugin.message.sendMessage(sender, "no_permission");
+            plugin.message.sendMessageRaw(sender, "no_permission");
             return true;
         }
 
