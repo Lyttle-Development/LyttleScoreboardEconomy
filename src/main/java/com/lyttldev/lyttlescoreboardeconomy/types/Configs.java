@@ -1,6 +1,7 @@
 package com.lyttldev.lyttlescoreboardeconomy.types;
 
 import com.lyttldev.lyttlescoreboardeconomy.LyttleScoreboardEconomy;
+import com.lyttledev.lyttleutils.types.Config;
 
 public class Configs {
     private final LyttleScoreboardEconomy plugin;

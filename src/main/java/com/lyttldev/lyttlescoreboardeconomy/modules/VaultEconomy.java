@@ -1,5 +1,6 @@
 package com.lyttldev.lyttlescoreboardeconomy.modules;
 
+import com.lyttldev.lyttlescoreboardeconomy.LyttleScoreboardEconomy;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Bukkit;
@@ -11,19 +12,25 @@ import java.util.List;
 import java.util.Objects;
 
 public class VaultEconomy implements Economy {
+    private final LyttleScoreboardEconomy plugin;
 
-    private final String objectiveName = "tokens";
+    private final String objectiveName;
+    private final String objectiveDisplayName;
     private final Scoreboard scoreboard;
 
-    public VaultEconomy() {
-        scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
+    public VaultEconomy(LyttleScoreboardEconomy plugin) {
+        this.plugin = plugin;
+        this.scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
+        this.objectiveDisplayName = (String) plugin.config.general.get("scoreboard_objective");
+        this.objectiveName = (String) plugin.config.general.get("scoreboard_objective_name");
+
         registerObjective();
     }
 
     private void registerObjective() {
         Objective objective = scoreboard.getObjective(objectiveName);
         if (objective == null) {
-            objective = scoreboard.registerNewObjective(objectiveName, "dummy", "Tokens");
+            objective = scoreboard.registerNewObjective(objectiveName, "dummy", objectiveDisplayName);
         }
     }
 
@@ -405,7 +412,7 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public String currencyNamePlural() {
-        return "Tokens";
+        return objectiveDisplayName;
     }
 
     /**
@@ -416,7 +423,7 @@ public class VaultEconomy implements Economy {
      */
     @Override
     public String currencyNameSingular() {
-        return "Token";
+        return objectiveDisplayName;
     }
 
     /**

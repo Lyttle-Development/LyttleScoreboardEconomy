@@ -1,7 +1,6 @@
 package com.lyttldev.lyttlescoreboardeconomy.commands;
 
 import com.lyttldev.lyttlescoreboardeconomy.LyttleScoreboardEconomy;
-import com.lyttldev.lyttlescoreboardeconomy.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
@@ -38,29 +37,29 @@ public class TokensCommand implements CommandExecutor, TabExecutor {
                     int depositAmount = Integer.parseInt(args[2]);
 
                     if (target == null) {
-                        Message.sendMessage(player, "That player is not online.");
+                        plugin.message.sendMessageRaw(player, "That player is not online.");
                         return true;
                     }
 
                     if (target == player) {
-                        Message.sendMessage(player, "You cannot send tokens to yourself.");
+                        plugin.message.sendMessageRaw(player, "You cannot send tokens to yourself.");
                         return true;
                     }
 
                     if (depositAmount < 0) {
-                        Message.sendMessage(player, "You cannot send a negative amount of tokens.");
+                        plugin.message.sendMessageRaw(player, "You cannot send a negative amount of tokens.");
                         return true;
                     }
 
                     if (depositAmount > plugin.economyImplementer.getBalance(player)) {
-                        Message.sendMessage(player, "You do not have enough tokens to send.");
+                        plugin.message.sendMessageRaw(player, "You do not have enough tokens to send.");
                         return true;
                     }
 
                     plugin.economyImplementer.depositPlayer(target, depositAmount);
                     plugin.economyImplementer.depositPlayer(player, depositAmount * -1);
-                    Message.sendMessage(player, "You have deposited &a" + depositAmount + " tokens&7 into &e" + target.getName() + "'s&7 account");
-                    Message.sendMessage(target, "&e" + player.getName() + "&7 has deposited &a" + depositAmount + " tokens&7 into your account");
+                    plugin.message.sendMessageRaw(player, "<gray>You have deposited <green>" + depositAmount + " tokens <gray>into <yellow>" + target.getName() + "'s <gray>account</gray>");
+                    plugin.message.sendMessageRaw(target, "<yellow>" + player.getName() + " <gray>has deposited <green>" + depositAmount + " tokens <gray>into your account</gray>");
                     return true;
                 } catch (Exception e) {
                     return false;
@@ -75,7 +74,7 @@ public class TokensCommand implements CommandExecutor, TabExecutor {
                 try {
                     Player target = Bukkit.getPlayer(args[1]);
                     int balance = (int)  plugin.economyImplementer.getBalance(target);
-                    Message.sendMessage(player, "&8" + target.getName() + "&7 has &a" + balance + " tokens&7.");
+                    plugin.message.sendMessageRaw(player, "<dark_gray>" + target.getName() + "<gray> has <green>" + balance + " tokens</gray>");
                     return true;
                 } catch (Exception e) {
                     return false;
@@ -86,7 +85,7 @@ public class TokensCommand implements CommandExecutor, TabExecutor {
         // get own tokens
         try {
             int balance = (int)  plugin.economyImplementer.getBalance(player);
-            Message.sendMessage(player, "You have &a" + balance + " tokens&7.");
+            plugin.message.sendMessageRaw(player, "<gray>You have <green>" + balance + " tokens</gray>");
             return true;
         } catch (Exception e) {
             return false;

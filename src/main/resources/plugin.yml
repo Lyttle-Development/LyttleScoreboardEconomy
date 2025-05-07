@@ -1,8 +1,13 @@
 name: LyttleScoreboardEconomy
+description: A lightweight economy plugin that uses scoreboard objectives to store data.
 version: '${projectVersion}'
 main: com.lyttldev.lyttlescoreboardeconomy.LyttleScoreboardEconomy
 api-version: '1.21'
-author: LyttlDev
+authors:
+  - LyttleDevelopment
+  - ThatsATim
+  - Stualyttle
+
 depend:
   - Vault
 loadbefore:
