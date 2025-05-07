@@ -9,7 +9,6 @@ authors:
   - Stualyttle
 
 depend:
-  - LyttleUtils
   - Vault
 loadbefore:
   - LyttleEssentials
