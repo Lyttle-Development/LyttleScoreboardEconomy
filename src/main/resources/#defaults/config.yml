@@ -11,3 +11,8 @@
 
 # ⚠️ Do not change this value manually!
 config_version: 0
+
+# The scoreboard objective to use for the economy.
+scoreboard_objective: "tokens"
+# The name of the scoreboard display name to use for the economy.
+scoreboard_objective_name: "Tokens"
