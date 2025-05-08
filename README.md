@@ -1,48 +1,136 @@
-# LyttleScoreboardEconomy
+<div align="center">
+  
+# Lyttle Scoreboard Economy
 
-LyttleScoreboardEconomy is a Minecraft plugin that provides an economy system based on the player's score. It's built with Java and Maven, and uses the Vault API for economy interactions.
+[![Paper](https://img.shields.io/badge/Paper-1.21.x-blue)](https://papermc.io)
+[![Hangar](https://img.shields.io/badge/Hangar-download-success)](https://hangar.papermc.io/Lyttle-Development)
+[![Discord](https://img.shields.io/discord/941334383216967690?color=7289DA&label=Discord&logo=discord&logoColor=ffffff)](https://discord.gg/QfqFFPFFQZ)
 
-## Features
+> ✨ **A lightweight scoreboard-based economy system for your Minecraft server!** ✨
 
-- Player balance is stored and managed as a score.
-- Compatibility with Vault API 1.4.
-- Supports multi-world economy.
-- Provides a `baltop` command to display the top players by balance.
-- Provides a `tokens` command to interact with the player's balance.
-- Provides an API for interacting with the player's balance.
+[📚 Features](#--features) • [⌨️ Commands](#-%EF%B8%8F-commands) • [🔑 Permissions](#--permissions) • [📥 Installation](#--installation) • [⚙️ Configuration](#%EF%B8%8F-configuration) • [📱 Support](#--support)
 
-## Installation
+</div>
 
-1. Download the latest version of the plugin from the [releases page](https://github.com/Lyttle-Development/LyttleScoreboardEconomy/releases).
-2. Place the downloaded `.jar` file into your server's `plugins` folder.
-3. Restart your server or use a plugin manager to load the plugin.
+![Divider](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-## Usage
+## 🌟 Features
 
-The plugin works automatically once installed. It integrates with Vault, so any plugin that uses Vault for economy transactions will be able to use LyttleScoreboardEconomy.
+### 🎯 Core Plugin Features
+- Scoreboard-based token economy system
+- Player-to-player token transfers
+- Real-time balance checking
+- Simple and intuitive command system
+- MiniMessage formatting support for all messages
 
-## Commands
+---
 
-Here are the commands that players can use with LyttleScoreboardEconomy:
+### 🤌 Lyttle Certified
+- Basic plugin without fluff
+- No unnecessary features
+- Full flexibility and configurability
+- Open source and free to use (MIT License)
 
-- `/baltop [page]`: Displays the top players by balance. The optional `page` argument can be used to navigate through the list.
-- `/tokens`: Displays the player's current balance.
-- `/tokens send <player> <amount>`: Sends the specified amount of tokens from the command sender to the specified player.
-- `/tokens balance [player]`: Displays the specified player's balance. If no player is specified, it displays the command sender's balance.
+---
 
-Please note that the `tokens` command can only be run by a player.
-## API
+## ⌨️ Commands
 
-LyttleScoreboardEconomy provides the following methods for interacting with a player's balance:
+> 💡 `<required>` `[optional]`
 
-- `getBalance(OfflinePlayer player)`: Returns the balance of the specified player.
-- `has(OfflinePlayer player, double amount)`: Checks if the player has at least the specified amount.
-- `withdrawPlayer(OfflinePlayer player, double amount)`: Withdraws the specified amount from the player's balance.
+| Command                    | Permission         | Description                     |
+|:--------------------------|:-------------------|:--------------------------------|
+| `/tokens`                 | `tokens.balance`   | Check your token balance       |
+| `/tokens balance [player]`| `tokens.balance`   | Check another player's balance |
+| `/tokens send <player> <amount>` | `tokens.send` | Send tokens to another player |
 
-## Support
+---
 
-If you encounter any issues or have any questions, please [open an issue](https://github.com/Lyttle-Development/LyttleScoreboardEconomy/issues) on GitHub.
+## 🔑 Permissions
 
-## Contributing
+| Permission Node    | Description                            | Default |
+|:------------------|:---------------------------------------|:--------|
+| `tokens.*`        | Grants all plugin permissions          | `❌`     |
+| `tokens.balance`  | Allows checking token balances         | `✔️`    |
+| `tokens.send`     | Allows sending tokens to other players | `✔️`    |
 
-Contributions are welcome! Please read the [contributing guidelines](CONTRIBUTING.md) before getting started.
+---
+
+## 📥 Installation
+
+### Quick Start
+1. Download the latest version from [Hangar](https://hangar.papermc.io/Lyttle-Development)
+2. Place the `.jar` file in your server's `plugins` folder
+3. Restart your server
+4. Edit the configuration file to customize the scoreboard settings
+5. Use `/tokens` to start managing your economy
+
+---
+
+### 📋 Requirements
+- Java 21 or newer
+- Paper 1.21.x+
+- Minimum 10MB free disk space
+
+---
+
+### 💫 Dependencies
+- None! This plugin works standalone
+
+---
+
+### 📝 Configuration Files
+#### 🔧 `config.yml`
+```yaml 
+scoreboard_objective: "tokens" 
+scoreboard_objective_name: "Tokens"
+``` 
+
+#### 💬 `messages.yml`
+Customize all plugin messages with MiniMessage formatting support.
+
+### 🔄 The #defaults Folder
+The folder serves several important purposes: `#defaults`
+1. **Backup Reference**: Contains original copies of all configuration files
+2. **Reset Option**: Use these to restore default settings
+3. **Update Safety**: Preserved during plugin updates
+4. **Documentation**: Shows all available options with comments
+
+
+> 💡 **Never modify files in the #defaults folder!** They are automatically overwritten during server restarts.
+>
+---
+
+## 💬 Support
+
+<div align="center">
+
+### 🤝 Need Help?
+
+[![Discord](https://img.shields.io/discord/941334383216967690?color=7289DA&label=Join%20Our%20Discord&logo=discord&logoColor=ffffff&style=for-the-badge)](https://discord.gg/QfqFFPFFQZ)
+
+🐛 Found a bug? [Open an Issue](https://github.com/Lyttle-Development/LyttleScoreboardEconomy/issues)  
+💡 Have a suggestion? [Share your idea](https://github.com/Lyttle-Development/LyttleScoreboardEconomy/issues)
+
+</div>
+
+---
+
+## 📜 License
+
+<div align="center">
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+### 🌟 Made with the lyttlest details in mind by [Lyttle Development](https://www.lyttledevelopment.com)
+
+If you enjoy this plugin, please consider:
+
+⭐ Giving it a star on GitHub <br>
+💬 Sharing it with other server owners<br>
+🎁 Supporting development through [Donations](https://github.com/LyttleDevelopment)
+
+![Divider](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+
+</div>
