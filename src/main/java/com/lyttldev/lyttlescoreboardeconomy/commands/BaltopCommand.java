@@ -1,6 +1,9 @@
 package com.lyttldev.lyttlescoreboardeconomy.commands;
 
 import com.lyttldev.lyttlescoreboardeconomy.LyttleScoreboardEconomy;
+import com.lyttledev.lyttleutils.types.Message.Replacements;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.command.Command;
@@ -17,6 +20,7 @@ import java.util.stream.Collectors;
 
 public class BaltopCommand implements CommandExecutor, TabExecutor {
     private final LyttleScoreboardEconomy plugin;
+    private MiniMessage mini = MiniMessage.miniMessage();
 
     public BaltopCommand(LyttleScoreboardEconomy plugin) {
         this.plugin = plugin;
@@ -30,40 +34,61 @@ public class BaltopCommand implements CommandExecutor, TabExecutor {
             return true;
         }
 
-        if (sender instanceof Player) {
-            int page = args.length > 0 ? Integer.parseInt(args[0]) : 1;
-            int pageSize = 10;
-            List<Map.Entry<String, Double>> topPlayers = getTopPlayers();
-            int pages = topPlayers.size() >= pageSize ? (int) Math.ceil(topPlayers.size() / pageSize) : 1;
-            if (page < 1) {
-                plugin.message.sendMessageRaw(sender, "Page must be greater than 0.");
-                return true;
-            }
-
-            if (page > pages) {
-                plugin.message.sendMessageRaw(sender, "There are only " + pages + " pages of top players.");
-                return true;
-            }
-
-            String message = "Top " + 10 * page + " players by tokens:";
-            for (int i = 0; i < pageSize; i++) {
-                if (i >= topPlayers.size()) {
-                    break;
-                }
-                Map.Entry<String, Double> player = topPlayers.get(i + (page - 1) * pageSize);
-                int nr = i + 1 + (page - 1) * pageSize;
-                message += "\n<gray>" + nr + ". <yellow>" + player.getKey() + "<dark_gray>: <green>" + player.getValue() + " Tokens<gray>";
-            }
-            message += "\nPage " + page + "/" + pages;
-            plugin.message.sendMessageRaw(sender, message);
-        } else {
+        if (!(sender instanceof Player)) {
             sender.sendMessage("This command can only be run by a player.");
         }
+
+        Player player = (Player) sender;
+        int page = args.length > 0 ? Integer.parseInt(args[0]) : 1;
+        int pageSize = 10;
+        List<Map.Entry<String, Double>> topPlayers = getTopPlayers();
+        int pages = topPlayers.size() >= pageSize ? (int) Math.ceil(topPlayers.size() / pageSize) : 1;
+
+        Replacements.Builder replacements = Replacements.builder()
+                .add("<PAGE>", String.valueOf(page))
+                .add("<PAGES>", String.valueOf(pages))
+                .add("<PAGE_SIZE>", String.valueOf(pageSize));
+
+        if (page < 1) {
+            plugin.message.sendMessage(sender, "baltop_page_zero", replacements.build(), player);
+            return true;
+        }
+
+        if (page > pages) {
+            plugin.message.sendMessage(sender, "baltop_page_maxed", replacements.build(), player);
+            return true;
+        }
+
+        replacements.add("<TOP_AMOUNT>", String.valueOf(10 * page));
+        Component title = plugin.message.getMessage("baltop_title", replacements.build(), player);
+        Component footer = plugin.message.getMessage("baltop_footer", replacements.build(), player);
+
+        StringBuilder message = new StringBuilder(mini.serialize(title));
+        for (int i = 0; i < pageSize; i++) {
+            if (i >= topPlayers.size()) {
+                break;
+            }
+            Map.Entry<String, Double> p = topPlayers.get(i + (page - 1) * pageSize);
+            int nr = i + 1 + (page - 1) * pageSize;
+            message.append("\n");
+            Replacements replacement = Replacements.builder()
+                .add("<PLAYER>", p.getKey())
+                .add("<AMOUNT>", String.valueOf(p.getValue()))
+                .add("<NUMBER>", String.valueOf(nr))
+                .build();
+            Component line = plugin.message.getMessage("baltop_line", replacement, player);
+            message.append(mini.serialize(line));
+        }
+        message.append("\n").append(mini.serialize(footer));
+        replacements.add("<TOP_AMOUNT>", String.valueOf(10 * page));
+        plugin.message.sendMessageRaw(sender, mini.deserialize(message.toString()));
+
         return true;
     }
 
     private List<Map.Entry<String, Double>> getTopPlayers() {
-        Objective objective = Bukkit.getScoreboardManager().getMainScoreboard().getObjective("tokens");
+        String objectiveName = (String) plugin.config.general.get("scoreboard_objective");
+        Objective objective = Bukkit.getScoreboardManager().getMainScoreboard().getObjective(objectiveName);
         if (objective == null) {
             return Collections.emptyList();
         }
