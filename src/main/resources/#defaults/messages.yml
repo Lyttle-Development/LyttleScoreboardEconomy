@@ -11,3 +11,20 @@
 
 # Prefix used at the start of most plugin messages
 prefix: <dark_aqua><bold>Lyttle<aqua><bold>Economy<reset> <dark_gray>- <gray>
+
+# Baltop command messages
+baltop_page_zero: "Page must be greater than 0."
+baltop_page_maxed: "There are only <PAGES> pages of top players."
+baltop_title: "Top <TOP_AMOUNT> players by tokens:"
+baltop_line: "<gray><NR>. <yellow><PLAYER_><dark_gray>: <green><TOKENS> Tokens<gray>"
+baltop_footer: "Page <PAGE>/<PAGES>"
+
+# Tokens command messages
+tokens_player_not_online: "That player is not online."
+tokens_not_yourself: "You cannot send tokens to yourself."
+tokens_negative: "You cannot send a negative amount of tokens."
+tokens_not_enough: "You do not have enough tokens to send."
+tokens_send: "<gray>You have deposited <green><AMOUNT> tokens <gray>into <yellow><PLAYER>'s <gray>account</gray>"
+tokens_received: "<yellow><PLAYER> <gray>has deposited <green><AMOUNT> tokens <gray>into your account</gray>"
+tokens_balance: "<dark_gray><PLAYER><gray> has <green><AMOUNT> tokens</gray>"
+tokens_balance_self: "<gray>You have <green><AMOUNT> tokens</gray>"
