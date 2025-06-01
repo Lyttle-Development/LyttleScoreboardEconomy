@@ -16,8 +16,8 @@ prefix: <dark_aqua><bold>Lyttle<aqua><bold>Economy<reset> <dark_gray>- <gray>
 baltop_page_zero: "Page must be greater than 0."
 baltop_page_maxed: "There are only <PAGES> pages of top players."
 baltop_title: "Top <TOP_AMOUNT> players by tokens:"
-baltop_line: "<gray><NR>. <yellow><PLAYER_><dark_gray>: <green><TOKENS> Tokens<gray>"
-baltop_footer: "Page <PAGE>/<PAGES>"
+baltop_line: "<gray><NUMBER>. <yellow><PLAYER><dark_gray>: <green><AMOUNT> Tokens<gray>"
+baltop_footer: "<gray>Page <PAGE>/<PAGES></gray>"
 
 # Tokens command messages
 tokens_player_not_online: "That player is not online."

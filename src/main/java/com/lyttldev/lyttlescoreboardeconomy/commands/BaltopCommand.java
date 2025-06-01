@@ -71,12 +71,12 @@ public class BaltopCommand implements CommandExecutor, TabExecutor {
             Map.Entry<String, Double> p = topPlayers.get(i + (page - 1) * pageSize);
             int nr = i + 1 + (page - 1) * pageSize;
             message.append("\n");
-            replacements
-                    .add("<NR>", String.valueOf(nr))
-                    .add("<PLAYER>", p.getKey())
-                    .add("<AMOUNT>", String.valueOf(p.getValue()))
-                    .add("<NUMBER>", String.valueOf(nr));
-            Component line = plugin.message.getMessage("baltop_line", replacements.build(), player);
+            Replacements replacement = Replacements.builder()
+                .add("<PLAYER>", p.getKey())
+                .add("<AMOUNT>", String.valueOf(p.getValue()))
+                .add("<NUMBER>", String.valueOf(nr))
+                .build();
+            Component line = plugin.message.getMessage("baltop_line", replacement, player);
             message.append(mini.serialize(line));
         }
         message.append("\n").append(mini.serialize(footer));
@@ -87,7 +87,8 @@ public class BaltopCommand implements CommandExecutor, TabExecutor {
     }
 
     private List<Map.Entry<String, Double>> getTopPlayers() {
-        Objective objective = Bukkit.getScoreboardManager().getMainScoreboard().getObjective("tokens");
+        String objectiveName = (String) plugin.config.general.get("scoreboard_objective");
+        Objective objective = Bukkit.getScoreboardManager().getMainScoreboard().getObjective(objectiveName);
         if (objective == null) {
             return Collections.emptyList();
         }

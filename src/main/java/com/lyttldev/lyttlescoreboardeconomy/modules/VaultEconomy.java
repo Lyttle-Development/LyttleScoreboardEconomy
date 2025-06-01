@@ -22,7 +22,7 @@ public class VaultEconomy implements Economy {
         this.plugin = plugin;
         this.scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
         this.objectiveDisplayName = (String) plugin.config.general.get("scoreboard_objective");
-        this.objectiveName = (String) plugin.config.general.get("scoreboard_objective_name");
+        this.objectiveName = this.objectiveDisplayName;
 
         registerObjective();
     }

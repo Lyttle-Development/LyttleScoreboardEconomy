@@ -128,6 +128,9 @@ public class LyttleScoreboardEconomy extends JavaPlugin {
                 config.messages.set("tokens_balance", config.defaultMessages.get("tokens_balance"));
                 config.messages.set("tokens_balance_self", config.defaultMessages.get("tokens_balance_self"));
 
+                // Remove old config entries.
+                config.general.set("scoreboard_objective_name", null);
+
                 // Update config version.
                 config.general.set("config_version", 3);
 
