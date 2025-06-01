@@ -11,3 +11,6 @@
 
 # ⚠️ Do not change this value manually!
 config_version: 0
+
+# The scoreboard objective to use for the economy.
+scoreboard_objective: "tokens"

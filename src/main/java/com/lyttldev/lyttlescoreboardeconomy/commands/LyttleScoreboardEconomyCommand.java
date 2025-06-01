@@ -1,7 +1,7 @@
 package com.lyttldev.lyttlescoreboardeconomy.commands;
 
 import com.lyttldev.lyttlescoreboardeconomy.LyttleScoreboardEconomy;
-import com.lyttldev.lyttlescoreboardeconomy.utils.Message;
+import net.kyori.adventure.text.Component;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -22,7 +22,7 @@ public class LyttleScoreboardEconomyCommand implements CommandExecutor, TabCompl
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         // Check for permission
         if (!(sender.hasPermission("lyttlescoreboardeconomy.lyttlescoreboardeconomy"))) {
-            Message.sendMessage(sender, "no_permission");
+            plugin.message.sendMessage(sender, "no_permission");
             return true;
         }
 
@@ -33,7 +33,7 @@ public class LyttleScoreboardEconomyCommand implements CommandExecutor, TabCompl
         if (args.length == 1) {
             if (args[0].equalsIgnoreCase("reload")) {
                 plugin.config.reload();
-                Message.sendMessageRaw(sender, "The config has been reloaded");
+                plugin.message.sendMessageRaw(sender, Component.text("The config has been reloaded"));
             }
         }
         return true;
