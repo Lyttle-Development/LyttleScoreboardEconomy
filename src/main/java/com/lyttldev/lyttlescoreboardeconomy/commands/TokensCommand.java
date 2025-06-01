@@ -1,6 +1,7 @@
 package com.lyttldev.lyttlescoreboardeconomy.commands;
 
 import com.lyttldev.lyttlescoreboardeconomy.LyttleScoreboardEconomy;
+import com.lyttledev.lyttleutils.types.Message.Replacements;
 import org.bukkit.Bukkit;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
@@ -37,29 +38,37 @@ public class TokensCommand implements CommandExecutor, TabExecutor {
                     int depositAmount = Integer.parseInt(args[2]);
 
                     if (target == null) {
-                        plugin.message.sendMessageRaw(player, "That player is not online.");
+                        plugin.message.sendMessage(player, "tokens_player_not_online");
                         return true;
                     }
 
                     if (target == player) {
-                        plugin.message.sendMessageRaw(player, "You cannot send tokens to yourself.");
+                        plugin.message.sendMessage(player, "tokens_not_yourself");
                         return true;
                     }
 
                     if (depositAmount < 0) {
-                        plugin.message.sendMessageRaw(player, "You cannot send a negative amount of tokens.");
+                        plugin.message.sendMessage(player, "tokens_negative");
                         return true;
                     }
 
                     if (depositAmount > plugin.economyImplementer.getBalance(player)) {
-                        plugin.message.sendMessageRaw(player, "You do not have enough tokens to send.");
+                        plugin.message.sendMessage(player, "You do not have enough tokens to send.");
                         return true;
                     }
 
                     plugin.economyImplementer.depositPlayer(target, depositAmount);
                     plugin.economyImplementer.depositPlayer(player, depositAmount * -1);
-                    plugin.message.sendMessageRaw(player, "<gray>You have deposited <green>" + depositAmount + " tokens <gray>into <yellow>" + target.getName() + "'s <gray>account</gray>");
-                    plugin.message.sendMessageRaw(target, "<yellow>" + player.getName() + " <gray>has deposited <green>" + depositAmount + " tokens <gray>into your account</gray>");
+                    Replacements playerReplacements = Replacements.builder()
+                            .add("<PLAYER>", player.getName())
+                            .add("<AMOUNT>", String.valueOf(depositAmount))
+                            .build();
+                    Replacements targetReplacements = Replacements.builder()
+                            .add("<PLAYER>", target.getName())
+                            .add("<AMOUNT>", String.valueOf(depositAmount))
+                            .build();
+                    plugin.message.sendMessage(player, "tokens_send", playerReplacements, player);
+                    plugin.message.sendMessage(target, "tokens_received", targetReplacements, target);
                     return true;
                 } catch (Exception e) {
                     return false;
@@ -74,7 +83,11 @@ public class TokensCommand implements CommandExecutor, TabExecutor {
                 try {
                     Player target = Bukkit.getPlayer(args[1]);
                     int balance = (int)  plugin.economyImplementer.getBalance(target);
-                    plugin.message.sendMessageRaw(player, "<dark_gray>" + target.getName() + "<gray> has <green>" + balance + " tokens</gray>");
+                    Replacements replacements = Replacements.builder()
+                        .add("<PLAYER>", target.getName())
+                        .add("<AMOUNT>", String.valueOf(balance))
+                        .build();
+                    plugin.message.sendMessage(player, "tokens_balance", replacements);
                     return true;
                 } catch (Exception e) {
                     return false;
@@ -85,7 +98,11 @@ public class TokensCommand implements CommandExecutor, TabExecutor {
         // get own tokens
         try {
             int balance = (int)  plugin.economyImplementer.getBalance(player);
-            plugin.message.sendMessageRaw(player, "<gray>You have <green>" + balance + " tokens</gray>");
+            Replacements replacements = Replacements.builder()
+                .add("<PLAYER>", player.getName())
+                .add("<AMOUNT>", String.valueOf(balance))
+                .build();
+            plugin.message.sendMessage(player, "tokens_balance_self", replacements);
             return true;
         } catch (Exception e) {
             return false;
