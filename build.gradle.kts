@@ -158,7 +158,7 @@ hangarPublish {
         version.set(versionString)
         channel.set(envChannel)
         changelog.set(changelogContent)
-        id.set("LyttleScoreboardEconomy")
+        id.set("lyttlescoreboardeconomy")
         apiKey.set(System.getenv("HANGAR_API_TOKEN"))
         platforms {
             register(Platforms.PAPER) {
