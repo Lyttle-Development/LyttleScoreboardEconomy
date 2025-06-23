@@ -9,6 +9,7 @@ plugins {
     `maven-publish`
     id("io.papermc.hangar-publish-plugin") version "0.1.2"
     id("com.gradleup.shadow") version "8.3.6"
+    id("com.modrinth.minotaur") version "2.+"
 }
 
 repositories {
@@ -170,4 +171,23 @@ hangarPublish {
             }
         }
     }
+}
+
+// --- Modrinth Publish Configuration ---
+modrinth {
+    token.set(System.getenv("MODRINTH_API_TOKEN")) // Token from workflow secrets
+    projectId.set("lyttlescoreboardeconomy") // Replace with your Modrinth project slug or ID
+    versionNumber.set(versionString)
+    changelog.set(changelogContent)
+    uploadFile.set(tasks.named<ShadowJar>("shadowJar").flatMap { it.archiveFile })
+    gameVersions.set((property("paperVersion") as String).split(",").map { it.trim() })
+    versionType.set(
+        when (envChannel.lowercase()) {
+            "release" -> "release"
+            "beta" -> "beta"
+            "alpha" -> "alpha"
+            else -> "alpha"
+        }
+    )
+    loaders.set(listOf("paper")) // Or add "spigot", "bukkit" etc as appropriate
 }
