@@ -29,8 +29,8 @@ repositories {
 }
 
 dependencies {
-    compileOnly(libs.io.papermc.paper.paper.api)
-    compileOnly(libs.com.github.milkbowl.vaultapi)
+    compileOnly("io.papermc.paper:paper-api:" + (property("paperVersion") as String) + "-R0.1-SNAPSHOT")
+    compileOnly("com.github.MilkBowl:VaultAPI:1.7") { exclude(group = "org.bukkit", module = "bukkit") }
     implementation("com.lyttledev:lyttleutils:1.1.7")
 }
 
