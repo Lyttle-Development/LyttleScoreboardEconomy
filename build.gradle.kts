@@ -29,9 +29,9 @@ repositories {
 }
 
 dependencies {
-    compileOnly(libs.io.papermc.paper.paper.api)
-    compileOnly(libs.com.github.milkbowl.vaultapi)
-    implementation("com.lyttledev:lyttleutils:1.1.1")
+    compileOnly("io.papermc.paper:paper-api:" + (property("paperVersion") as String) + "-R0.1-SNAPSHOT")
+    compileOnly("com.github.MilkBowl:VaultAPI:1.7") { exclude(group = "org.bukkit", module = "bukkit") }
+    implementation("com.lyttledev:lyttleutils:1.1.7")
 }
 
 group = "com.lyttledev"
@@ -159,7 +159,7 @@ hangarPublish {
         version.set(versionString)
         channel.set(envChannel)
         changelog.set(changelogContent)
-        id.set("lyttlescoreboardeconomy")
+        id.set("LyttleScoreboardEconomy")
         apiKey.set(System.getenv("HANGAR_API_TOKEN"))
         platforms {
             register(Platforms.PAPER) {
